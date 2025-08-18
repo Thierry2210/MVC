@@ -35,9 +35,9 @@
     <!--========== HEADER ==========-->
     <header class="header" style="background: #005BAA;">
         <div class="header__container">
-            <a href="#" class="header__logo">Estrutura MVC</a>
+            <a href="#" class="header__logo" style="color: white;">Biblioteca</a>
 
-            <a href="#" class="header__logo">Alisson Juan Feitoza da Silva</a>
+            <a href="#" class="header__logo" style="color: white;">Matheus Thierry Santos da Silva</a>
 
             <div class="header__toggle">
                 <i class='bx bx-menu' id="header-toggle"></i>
@@ -68,10 +68,10 @@
                             <div class="nav__dropdown-collapse">
                                 <div class="nav__dropdown-content">
                                     <a href="emprestimo" class="nav__dropdown-item">Empréstimo</a>
-                                    <a href="#" class="nav__dropdown-item">Livros</a>
-                                    <a href="#" class="nav__dropdown-item">Autor</a>
+                                    <a href="livro" class="nav__dropdown-item">Livros</a>
+                                    <a href="autor" class="nav__dropdown-item">Autor</a>
                                     <a href="#" class="nav__dropdown-item">Devolução</a>
-                                    <a href="#" class="nav__dropdown-item">Aluno</a>
+                                    <a href="aluno" class="nav__dropdown-item">Aluno</a>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,4 @@
             </a>
         </nav>
     </div>
-
-    <!--========== MAIN JS ==========-->
-    <script src="assets/js/main.js"></script>
 </body>

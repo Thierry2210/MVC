@@ -15,4 +15,28 @@ class Index extends Controller {
 		$this->view->render('footer');
     }
     
+    function exemplar()
+    {
+        $this->model->Exemplar();
+    }
+
+    function dataRetirada()
+    {
+        $this->model->dataRetirada();
+    }
+
+    function previsaoDevolucao()
+    {
+        $this->model->previDevolucao();
+    }
+
+    function dataDevolucao()
+    {
+        $this->model->loadData();
+    }
+
+    function multa()
+    {
+        $this->model->multa();
+    }
 }

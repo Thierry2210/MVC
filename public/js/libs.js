@@ -38,7 +38,6 @@ axios.interceptors.response.use(function(response) {
     return Promise.reject(error);
 });
 
-
 function hideEdit() {
     document.querySelector("#botoesedit").style.display = "none";
     document.querySelector("#botaocad").style.display = "block";
