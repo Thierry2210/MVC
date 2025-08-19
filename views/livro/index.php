@@ -2,37 +2,36 @@
     <div class="container">
         <div class="card shadow-sm rounded-4 p-4">
             <form name="frmLivro" id="frmLivro">
-                <div class="mb-4 p-3">
+                <div class="row justify-content-center">
+                    <h3 class="text-center mb-4">Cadastro de Livros</h3>
                     <input type="hidden" id="txtcodlivro" name="txtcodlivro" value="">
-                    <div class="row row-col-4">
-                        <div class="mb-4 col-md-4">
-                            <label for="txtisbn" class="form-label fw-semibold">ISBN</label>
+                    <div class="row">
+                        <div class="mb-4 col-md-2">
+                            <label for="" class="form-label fw-semibold">ISBN</label>
                             <input type="text" id="txtisbn" name="txtisbn" class="form-control" placeholder="Digite o ISBN do livro" onkeypress="return (event.charCode = 13)">
                         </div>
-                        <div class="mb-4 col-md-4">
-                            <label for="txttitlivro" class="form-label fw-semibold">Título</label>
-                            <input type="text" id="txttitlivro" name="txttitlivro" class="form-control" placeholder="Digite o nome do autor">
+                        <div class="mb-4 col-md-3">
+                            <label for="" class="form-label fw-semibold">Título</label>
+                            <input type="text" id="txttitlivro" name="txttitlivro" class="form-control" placeholder="Digite o título do livro">
                         </div>
-                    </div>
-                    <div class="row row-col-4">
-                        <div class="mb-4 col-md-4">
-                            <label for="txtedlivro" class="form-label fw-semibold">Edição</label>
-                            <input type="text" id="txtedlivro" name="txtedlivro" class="form-control" placeholder="Digite o nome do autor">
+                        <div class="mb-4 col-md-2">
+                            <label for="" class="form-label fw-semibold">Edição</label>
+                            <input type="text" id="txtedlivro" name="txtedlivro" class="form-control" placeholder="Digite a edição do livro">
                         </div>
-                        <div class="mb-4 col-md-4">
+                        <div class="mb-4 col-md-2">
                             <label for="txtvallivro" class="form-label fw-semibold">Valor</label>
-                            <div class="input-group mb-2">
+                            <div class="input-group">
                                 <label for="" class="input-group-text">R$</label>
                                 <input type="text" id="txtvallivro" name="txtvallivro" class="form-control" aria-label="Amount (to the nearest real)">
                             </div>
 
                         </div>
-                        <div class="mb-4 col-md-4">
+                        <div class="mb-4 col-md-3">
                             <label for="txtnomeautor" class="form-label fw-semibold">Autor</label>
                             <select id="txtnomeautor" name="txtnomeautor" class="form-select"></select>
                         </div>
                     </div>
-                    <div class="d-flex gap-2 mb-6">
+                    <div class="d-flex gap-2 mb-6 justify-content-center">
                         <div id="botaocad">
                             <button type="button" class="btn btn-primary" id="btnInc">Incluir</button>
                         </div>
@@ -46,6 +45,7 @@
         </div>
         <br>
         <div class="card shadow-sm rounded-4 p-4">
+            <h3 class="text-center mb-4">Registro de Livros</h3>
             <table class="table table-hover align-middle" id="tabres">
                 <thead class="table-light">
                     <tr>

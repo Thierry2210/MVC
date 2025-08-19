@@ -9,7 +9,7 @@ class Autor_model extends Model
 
     public function listaAutor()
     {
-        $sql = "select codigo,nome from biblioteca.autor order by codigo";
+        $sql = "select * from biblioteca.autor order by codigo";
         $result = $this->select($sql);
         echo (json_encode($result));
     }
@@ -46,7 +46,7 @@ class Autor_model extends Model
     public function loadData($id)
     {
         $cod = (int)$id;
-        $result = $this->select("select codigo,nome from biblioteca.autor where codigo=:cod", array(":cod" => $cod));
+        $result = $this->select("select * from biblioteca.autor where codigo=:cod", array(":cod" => $cod));
         $result = json_encode($result);
         echo ($result);
     }

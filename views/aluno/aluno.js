@@ -1,5 +1,5 @@
 function loadData(numero) {
-    getUrl(`${BASEURL}/aluno/loadData/${numero}`)
+    postForm(`${BASEURL}/aluno/loadData/${numero}`)
         .then(res => {
             if (res.data.length > 0) {
                 var txtraaluno = document.querySelector('#txtraaluno');
@@ -28,7 +28,7 @@ function delData(id) {
 
 function listaAluno() {
     document.querySelector('#lsaluno').innerHTML = 'Carregando...';
-    getUrl(`${BASEURL}/aluno/listaAluno`)
+    postForm(`${BASEURL}/aluno/listaAluno`)
         .then(res => {
             var txt = "";
             for (var i = 0; i < res.data.length; i++) {

@@ -5,7 +5,7 @@ class Index extends Controller {
     function __construct() {
         parent::__construct();
         $this->view = new View(); // Add this line to define $view
-        $this->view->js = array('index/js/index.js');
+        $this->view->js = array('index/index.js');
     }
     
     function index() {
@@ -15,28 +15,7 @@ class Index extends Controller {
 		$this->view->render('footer');
     }
     
-    function exemplar()
-    {
-        $this->model->Exemplar();
-    }
-
-    function dataRetirada()
-    {
-        $this->model->dataRetirada();
-    }
-
-    function previsaoDevolucao()
-    {
-        $this->model->previDevolucao();
-    }
-
-    function dataDevolucao()
-    {
-        $this->model->loadData();
-    }
-
-    function multa()
-    {
-        $this->model->multa();
+    function listaPrincipal() {
+        $this->model->listaPrincipal();
     }
 }

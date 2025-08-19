@@ -1,6 +1,6 @@
 <?php
 
-class livro_model extends Model
+class Livro_model extends Model
 {
     public function __construct()
     {

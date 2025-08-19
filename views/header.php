@@ -56,26 +56,43 @@
 
                 <div class="nav__list">
                     <div class="nav__items">
-                        <h3 class="nav__subtitle">Profile</h3>
+                        <h3 class="nav__subtitle">Empréstimos</h3>
 
                         <div class="nav__dropdown">
                             <a href="#" class="nav__link">
                                 <i class="fa-solid fa-book nav__icon"></i>
-                                <span class="nav__name">Profile</span>
+                                <span class="nav__name">Biblioteca</span>
                                 <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
                             </a>
 
                             <div class="nav__dropdown-collapse">
                                 <div class="nav__dropdown-content">
                                     <a href="emprestimo" class="nav__dropdown-item">Empréstimo</a>
-                                    <a href="livro" class="nav__dropdown-item">Livros</a>
-                                    <a href="autor" class="nav__dropdown-item">Autor</a>
-                                    <a href="#" class="nav__dropdown-item">Devolução</a>
-                                    <a href="aluno" class="nav__dropdown-item">Aluno</a>
                                 </div>
                             </div>
                         </div>
-<!-- 
+                    </div>
+                    <div class="nav__list">
+                        <div class="nav__items">
+                            <h3 class="nav__subtitle">Cadastrar</h3>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class="fa-solid fa-user-gear"></i>
+                                    <span class="nav__name">ADm</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="livro" class="nav__dropdown-item">Cad de Livros</a>
+                                        <a href="autor" class="nav__dropdown-item">Cad de Autor</a>
+                                        <a href="devolucao" class="nav__dropdown-item">Devolução</a>
+                                        <a href="aluno" class="nav__dropdown-item">Cad Aluno</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 
                         <a href="#" class="nav__link">
                             <i class='bx bx-message-rounded nav__icon'></i>
                             <span class="nav__name">Messages</span>
@@ -114,11 +131,6 @@
                     </div>
                 </div>
             </div> -->
-
-            <a href="#" class="nav__link nav__logout">
-                <i class='bx bx-log-out nav__icon'></i>
-                <span class="nav__name">Log Out</span>
-            </a>
         </nav>
     </div>
 </body>

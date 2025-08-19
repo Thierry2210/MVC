@@ -1,15 +1,20 @@
 <main class="mt-5 mb-5">
     <div class="container">
         <div class="card shadow-sm rounded-4 p-4">
-            <form name="frmAutor" id="frmAutor">
-                <div class="row">
-                    <h3 class="text-center mb-4">Cadastro de Autor</h3>
+            <form name="frmDevolucao" id="frmDevolucao">
+                <div class="mb-4 p-3">
                     <div class="row justify-content-center">
-                        <input type="hidden" id="txtcodautor" name="txtcodautor" value="" class="form-control">
+                        <h3 class=" text-center mb-4">Devolução de Lviros</h3>
                         <div class="mb-4 col-md-4">
-                            <label for="txtnomeautor" class="form-label fw-semibold">Nome do Autor</label>
-                            <input type="text" id="txtnomeautor" name="txtnomeautor" class="form-control" placeholder="Digite o nome do autor">
+                            <input type="hidden" id="txtnumemprestimo" name="txtnumemprestimo" value="">
+                            <label for="txtlivro" class="form-label fw-semibold">Livro</label>
+                            <select id="txtlivro" name="txtlivro" class="form-select"></select>
                         </div>
+                        <div class="mb-4 col-md-3">
+                            <label for="txtdatadev" class="form-label fw-semibold">Data para Devolver</label>
+                            <input type="date" id="txtdatadev" name="txtdatadev" class="form-control">
+                        </div>
+                        <input type="hidden" id="txtmulta" name="txtmulta" class="form-control" placeholder="">
                         <div class="d-flex gap-2 mb-6 justify-content-center">
                             <div id="botaocad">
                                 <button type="button" class="btn btn-primary" id="btnInc">Incluir</button>
@@ -25,16 +30,17 @@
         </div>
         <br>
         <div class="card shadow-sm rounded-4 p-4">
-            <h3 class="text-center mb-4">Registro de Autores</h3>
             <table class="table table-hover align-middle" id="tabres">
                 <thead class="table-light">
                     <tr>
-                        <th>Código</th>
-                        <th>Nome</th>
+                        <th>Empréstimo</th>
+                        <th>Livro</th>
+                        <th>Data Devolução</th>
+                        <th>Multa</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
-                <tbody id="lsautor"></tbody>
+                <tbody id="lsdevolucao"></tbody>
             </table>
         </div>
     </div>

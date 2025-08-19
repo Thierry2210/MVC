@@ -12,7 +12,7 @@ function loadData(numero) {
         });
 }
 
-function delData(id) {
+function delAutor(id) {
     if (confirm("Confirma a Exclusão do Autor?")) {
         var params = { id: id };
         deleteItem(`${BASEURL}/autor/delAutor`, params)
