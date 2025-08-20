@@ -30,7 +30,7 @@ class Aluno_model extends Model
         echo (json_encode($msg));
     }
 
-    public function delAluno()
+    public function del()
     {
         $raaluno = (int)$_GET["id"];
         $msg = array("codigo" => 0, "texto" => "Erro ao excluir.");

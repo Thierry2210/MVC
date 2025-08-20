@@ -27,9 +27,9 @@ class Livro extends Controller
         $this->model->listaLivro();
     }
 
-    function delLivro()
+    function del()
     {
-        $this->model->delLivro();
+        $this->model->del();
     }
 
     function loadData($id)

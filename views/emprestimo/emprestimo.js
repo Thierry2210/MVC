@@ -1,55 +1,8 @@
-function loadData(numero) {
-    postForm(`${BASEURL}/emprestimo/loadData/${numero}`)
-        .then(res => {
-            if (res.data.length > 0) {
-                var txtnumeroempre = document.querySelector('#txtnumeroempre');
-                var txtraaluno = document.querySelector('#txtraaluno');
-                var txtdataprevi = document.querySelector('#txtdataprevi');
-                txtnumeroempre.value = res.data[0].numero;
-                txtraaluno.value = res.data[0].ra;
-                txtdataprevi.value = res.data[0].data;
-                txtnumeroempre.readOnly = true;
-                showEdit();
-            }
-        });
-}
-
-function delData(id) {
-    if (confirm("Confirma a Exclusão do Emprestimo?")) {
-        var params = { id: id };
-        deleteItem(`${BASEURL}/emprestimo/delEmprestimo`, params)
-            .then(res => {
-                alert(res.data.texto);
-                if (res.data.codigo == "1") {
-                    reset();
-                    listaEmprestimo();
-                }
-            })
-    }
-}
-
-// function listaEmprestimo() {
-//     document.querySelector('#lsempre').innerHTML = 'Carregando...';
-//     postForm(`${BASEURL}/emprestimo/listaEmprestimo`)
-//         .then(res => {
-//             var txt = "";
-//             for (var i = 0; i < res.data.length; i++) {
-//                 var reg = res.data[i];
-//                 var bEdit = `<a href="javascript:void(0)" onclick="loadData(${reg.numero})"><i class="bx bx-edit"></i></a>`;
-//                 var bDel = `<a href="javascript:void(0)" onclick="delData(${reg.numero})"><i class="bx bx-trash"></i></a>`;
-//                 txt += `<tr>
-//                     <td>${reg.numero}</td><td>${reg.data}</td><td>${reg.ra}</td><td>${bEdit}${bDel}</td>
-//                 </tr>`;
-//             }
-//             document.querySelector('#lsempre').innerHTML = txt;
-//         });
-// }
-
 function selectLivro() {
     document.querySelector("#txtlivro");
-     postForm(`${BASEURL}/emprestimo/selectLivro`)
+    postForm(`${BASEURL}/emprestimo/selectLivro`)
         .then(res => {
-            var txt = "<option selected>Selecione um livro</option>"; 
+            var txt = "<option selected>Selecione um livro</option>";
             for (var i = 0; i < res.data.length; i++) {
                 var reg = res.data[i];
                 txt += `<option value="${reg.codigo}">${reg.titulo}</option>`;
@@ -58,16 +11,43 @@ function selectLivro() {
         });
 }
 
+function dataPrevista() {
+    document.querySelector('#lsdataprevista').innerHTML = 'Carregando...';
+    const dataPrevista = new Date();
+    dataPrevista.setDate(dataPrevista.getDate() + 30); var txt = "";
+    txt += `<div class="mb-3">
+                            <div class="alert alert-warning mt-2" role="alert">
+                                ⚠️ Após 30 dias do prazo, será aplicada uma multa de <strong>R$ 1,50 por dia</strong> de atraso.
+                            </div>
+                        </div>`
+    document.querySelector('#lsdataprevista').innerHTML = txt;
+}
+
+function reset() {
+    document.querySelector("#frmEmprestimo").reset();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    reset();
     selectLivro();
-    // listaEmprestimo();
+
     document.querySelector("#btnInc").addEventListener("click", () => {
+        dataPrevista();
         let form = document.querySelector("#frmEmprestimo");
         postForm(`${BASEURL}/emprestimo/addEmprestimo`, form).then(res => {
             alert(res.data.texto);
             if (res.data.codigo == "1") {
                 reset();
-                listaEmprestimo();
+                let numeroEmpre = document.querySelector("#txtnumeroempre").value;  
+                let livro = document.querySelector("#txtlivro").value;  
+
+                postForm(`${BASEURL}/emprestimo/addEmprestimoLivro`, {
+                    txtnumeroempre: numeroEmpre,
+                    txtlivro: livro
+                }).then(res2 => {
+                    alert(res2.data.texto);
+                    reset();
+                })
             }
         })
     });

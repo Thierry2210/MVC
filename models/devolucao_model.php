@@ -7,13 +7,6 @@ class Devolucao_model extends Model
         parent::__construct();
     }
 
-    public function listaDevolucao()
-    {
-        $sql = "select * from biblioteca.devolucao order by emprestimo";
-        $result = $this->select($sql);
-        echo (json_encode($result));
-    }
-
     public function insertDevolucao()
     {
         $x = file_get_contents('php://input');
@@ -32,57 +25,32 @@ class Devolucao_model extends Model
         echo (json_encode($msg));
     }
 
-    public function delDevolucao()
-    {
-        $emprestimo = (int)$_GET["id"];
-        $msg = array("codigo" => 0, "texto" => "Erro ao excluir.");
-        if ($emprestimo > 0) {
-            $result = $this->delete("biblioteca.devolucao", "emprestimo='$emprestimo'");
-            if ($result) {
-                $msg = array("codigo" => 1, "texto" => "Registro excluído com sucesso.");
-            }
-        }
-        echo (json_encode($msg));
-    }
-
-
-    public function loadData($id)
-    {
-        $emprestimo = (int)$id;
-        $result = $this->select("select * from biblioteca.devolucao where emprestimo=:emprestimo", array(":emprestimo" => $emprestimo));
-        $result = json_encode($result);
-        echo ($result);
-    }
-
-    public function save()
-    {
-        $x = file_get_contents("php://input");
-        $x = json_decode($x);
-        $emprestimo = (int)$x->txtemprestimo;
-        $txtlivro = $x->txttxtlivro;
-        $txtdatadev = $x->txttxtdatadev;
-        $txtmulta = $x->txtmulta;
-        $msg = array("codigo" => 0, "texto" => "Erro ao atualizar.");
-        if ($emprestimo > 0) {
-            $dadosSave = array("livro" => $txtlivro, "datadevolucao" => $txtdatadev, "multa" => $txtmulta);
-            $result = $this->update("biblioteca.devolucao", $dadosSave, "emprestimo='$emprestimo'");
-            if ($result) {
-                $msg = array("codigo" => 1, "texto" => "Registro atualizado com sucesso.");
-            }
-        }
-        echo (json_encode($msg));
-    }
-
     public function selectLivro()
     {
         $result = $this->select("SELECT 
-    el.emprestimo, 
-    (SELECT l.titulo 
-       FROM biblioteca.livro l 
-      WHERE l.codigo = el.livro) AS livro
-FROM biblioteca.emprestimolivro el
-ORDER BY el.emprestimo");
+        el.emprestimo, 
+        (SELECT l.titulo 
+        FROM biblioteca.livro l 
+        WHERE l.codigo = el.livro) AS livro
+        FROM biblioteca.emprestimolivro el
+        ORDER BY el.emprestimo");
         $result = json_encode($result);
         echo ($result);
     }
 }
+
+$dataEmprestimo = new DateTime($resultado['data']);
+$dataHoje = new DateTime();
+$dias = $dataEmprestimo->diff($dataHoje)->days;
+
+$multa = 0;
+if ($dias > 30) {
+    $multa = ($dias - 30) * 1.15;
+}
+
+echo json_encode([
+    "codigo" => 1,
+    "emprestimo" => $resultado['emprestimo'],
+    "dias" => $dias,
+    "multa" => $multa
+]);

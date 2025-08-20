@@ -30,7 +30,7 @@ class Autor_model extends Model
         echo (json_encode($msg));
     }
 
-    public function delAutor()
+    public function del()
     {
         $codautor = (int)$_GET["id"];
         $msg = array("codigo" => 0, "texto" => "Erro ao excluir.");

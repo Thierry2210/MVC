@@ -23,8 +23,8 @@ class Devolucao extends Controller {
         $this->model->listaDevolucao();
     }
 
-    function delDevolucao() {
-        $this->model->delDevolucao();
+    function del() {
+        $this->model->del();
     }
 
     function loadData($id) {

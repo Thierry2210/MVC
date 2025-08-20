@@ -34,7 +34,7 @@ class Livro_model extends Model
         echo (json_encode($msg));
     }
 
-    public function delLivro()
+    public function del()
     {
         $codlivro = (int)$_GET["id"];
         $msg = array("codigo" => 0, "texto" => "Erro ao excluir.");

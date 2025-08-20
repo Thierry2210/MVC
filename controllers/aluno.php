@@ -23,8 +23,8 @@ class Aluno extends Controller {
         $this->model->listaAluno();
     }
 
-    function delAluno() {
-        $this->model->delAluno();
+    function del() {
+        $this->model->del();
     }
 
     function loadData($id) {

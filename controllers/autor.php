@@ -23,8 +23,8 @@ class Autor extends Controller {
         $this->model->listaAutor();
     }
 
-    function delAutor() {
-        $this->model->delAutor();
+    function del() {
+        $this->model->del();
     }
 
     function loadData($id) {

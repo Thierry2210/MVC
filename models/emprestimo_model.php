@@ -7,68 +7,33 @@ class Emprestimo_model extends Model
         parent::__construct();
     }
 
-    public function listaEmprestimo()
-    {
-        $sql = "select numero,data,ra from biblioteca.emprestimo order by numero";
-        $result = $this->select($sql);
-        echo (json_encode($result));
-    }
-
     public function insertEmprestimo()
     {
         $x = file_get_contents('php://input');
         $x = json_decode($x);
-        $numeroempre = $x->txtnumeroempre;
-        $dataprevi = $x->txtdataprevi;
         $raaluno = $x->txtraaluno;
+        $livro = $x->txtlivro;
+        $dataPrevista = date('Y-m-d', strtotime('+30 days'));
 
-        $result = $this->insert("biblioteca.emprestimo", array("numero" => $numeroempre, "dataprevistadev" => $dataprevi, "ra" => $raaluno));
+        $this->insert("biblioteca.emprestimo", array(
+            "data" => date("Y-m-d"),
+            "ra" => $raaluno
+        ));
+
+        $numeroempre = $this->db->lastInsertId();
+
+        $result = $this->insert("biblioteca.emprestimolivro", array(
+            "emprestimo" => $numeroempre,
+            "livro" => $livro,
+            "dataprevistadev" => $dataPrevista
+        ));
+
         if ($result) {
             $msg = array("codigo" => 1, "texto" => "Registro inserido com sucesso.");
         } else {
             $msg = array("codigo" => 0, "texto" => "Erro ao inserir");
         }
-        echo (json_encode($msg));
-    }
-
-    public function delEmprestimo()
-    {
-        $numeroempre = (int)$_GET["id"];
-        $msg = array("codigo" => 0, "texto" => "Erro ao excluir.");
-        if ($numeroempre > 0) {
-            $result = $this->delete("biblioteca.emprestimo", "numero='$numeroempre'");
-            if ($result) {
-                $msg = array("codigo" => 1, "texto" => "Registro excluído com sucesso.");
-            }
-        }
-        echo (json_encode($msg));
-    }
-
-
-    public function loadData($id)
-    {
-        $numero = (int)$id;
-        $result = $this->select("select * from biblioteca.emprestimo where numero=:numero", array(":numero" => $numero));
-        $result = json_encode($result);
-        echo ($result);
-    }
-
-    public function save()
-    {
-        $x = file_get_contents("php://input");
-        $x = json_decode($x);
-        $numeroempre = (int)$x->txtnumeroempre;
-        $dataprevi = $x->txtdataprevi;
-        $raaluno = $x->txtraaluno;
-        $msg = array("codigo" => 0, "texto" => "Erro ao atualizar.");
-        if ($numeroempre > 0) {
-            $dadosSave = array("dataprevistadev" => $dataprevi, "ra" => $raaluno);
-            $result = $this->update("biblioteca.emprestimo", $dadosSave, "numero='$numeroempre'");
-            if ($result) {
-                $msg = array("codigo" => 1, "texto" => "Registro atualizado com sucesso.");
-            }
-        }
-        echo (json_encode($msg));
+        echo json_encode($msg);
     }
 
     public function selectLivro()

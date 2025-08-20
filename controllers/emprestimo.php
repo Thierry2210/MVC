@@ -19,24 +19,12 @@ class Emprestimo extends Controller {
         $this->model->insertEmprestimo();
     }
 
-    function listaEmprestimo() {
-        $this->model->listaEmprestimo();
-    }
-
-    function delEmprestimo() {
-        $this->model->delEmprestimo();
-    }
-
-    function loadData($id) {
-        $this->model->loadData($id);
-    }
-
-    function save() {
-        $this->model->save();
+    function addEmprestimoLivro() {
+        $this->model->insertEmprestimoLivro();
     }
 
     function selectLivro() {
         $this->model->selectLivro();
     }
-
+    
 }

@@ -74,12 +74,12 @@
                     </div>
                     <div class="nav__list">
                         <div class="nav__items">
-                            <h3 class="nav__subtitle">Cadastrar</h3>
+                            <h3 class="nav__subtitle">Manutenção</h3>
 
                             <div class="nav__dropdown">
                                 <a href="#" class="nav__link">
                                     <i class="fa-solid fa-user-gear"></i>
-                                    <span class="nav__name">ADm</span>
+                                    <span class="nav__name">ADM</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
                                 </a>
 

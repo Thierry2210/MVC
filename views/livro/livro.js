@@ -18,7 +18,7 @@ function loadData(numero) {
         });
 }
 
-function delLivro(id) {
+function delData(id) {
     if (confirm("Confirma a Exclusão do Livro?")) {
         var params = { id: id };
         deleteItem(`${BASEURL}/livro/delLivro`, params)
