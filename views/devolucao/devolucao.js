@@ -1,23 +1,22 @@
 function reset() {
     document.querySelector('#frmDevolucao').reset();
-    document.querySelector('#lslivrosemprestados').innerHTML = "";
+    document.querySelector('#livroSelecionado').innerHTML = "";
 }
 
 function selectLivro() {
-    document.querySelector("#lslivrosemprestados");
     postForm(`${BASEURL}/devolucao/selectLivro`)
         .then(res => {
-            var txt = "";
-            for (var i = 0; i < res.data.length; i++) {
-                var reg = res.data[i];
-                txt += ` <tr>
-                        <td>
-                            <input type="checkbox" name="livros[]" value="${reg.emprestimo}" class="form-check-input">
-                        </td>
-                        <td>${reg.livro}</td>
-                    </tr>`;
+            const select = document.querySelector('#livroSelecionado');
+            select.innerHTML = '<option value="">Selecione um livro</option>'; // reset
+
+            if (Array.isArray(res.data)) {
+                res.data.forEach(res => {
+                    const option = document.createElement('option');
+                    option.value = res.livro_codigo;
+                    option.textContent = res.livro;
+                    select.appendChild(option);
+                });
             }
-            document.querySelector('#lslivrosemprestados').innerHTML = txt;
         });
 }
 
@@ -26,27 +25,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#btnBusc").addEventListener("click", () => {
         selectLivro();
     });
+
     document.querySelector("#btnInc").addEventListener("click", () => {
-        let checkboxes = document.querySelectorAll("input[name='livros[]']:checked");
-        if (checkboxes.length === 0) {
-            alert("Selecione pelo menos um livro para devolver.");
-            return;
-        }
+        const livroSelecionado = document.querySelector("#livroSelecionado").value;
+        const ra = document.querySelector("#txtra").value;
 
-        let livrosSelecionados = [];
-        checkboxes.forEach(cb => livrosSelecionados.push(cb.value));
+        const formData = new FormData();
+        formData.append("ra", ra);
+        console.log(ra);
+        formData.append("livro", livroSelecionado);
 
-        let payload = {
-            txtra: document.querySelector("#txtra").value,
-            livros: livrosSelecionados
-        };
-
-        postForm(`${BASEURL}/devolucao/addDevolucao`, payload).then(res => {
-            alert(res.data.texto);
-            if (res.data.codigo == "1") {
+        reset();
+        fetch(`${BASEURL}/devolucao/addDevolucao`, {
+            method: "POST",
+            body: formData
+        }).then(res => {
+            if (res.codigo == "1") {
+                alert(res.data.texto);
                 reset();
             }
         });
-    });
-
+    })
 })

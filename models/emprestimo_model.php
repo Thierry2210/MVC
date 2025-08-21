@@ -15,6 +15,38 @@ class Emprestimo_model extends Model
         $livro = $x->txtlivro;
         $dataPrevista = date('Y-m-d', strtotime('+30 days'));
 
+        $sql = "SELECT 
+                count(*)
+            FROM 
+                biblioteca.emprestimolivro el,
+                biblioteca.livro l 
+            WHERE 
+                el.livro = l.codigo
+                and el.livro = :livro";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':livro', $livro, PDO::PARAM_STR);
+        $stmt->execute();
+        $numEmprestimo = $stmt->fetchColumn();
+        $sql = "SELECT 
+                count(*)
+            FROM 
+                biblioteca.devolucao d,
+                biblioteca.emprestimolivro el
+            WHERE 
+                d.livro = el.livro
+                and el.emprestimo = d.emprestimo
+                and d.livro = :livro";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':livro', $livro, PDO::PARAM_STR);
+        $stmt->execute();
+        $qtdDevolucao = $stmt->fetchColumn();
+        if ($numEmprestimo > 0 && $qtdDevolucao != $numEmprestimo) {
+            $msg = array("codigo" => 0, "texto" => "Este livro já está emprestado.");
+            echo json_encode($msg);
+            return;
+        }
         $this->insert("biblioteca.emprestimo", array(
             "data" => date("Y-m-d"),
             "ra" => $raaluno

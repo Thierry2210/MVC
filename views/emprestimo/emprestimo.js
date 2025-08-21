@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(res.data.texto);
             if (res.data.codigo == "1") {
                 reset();
-                let numeroEmpre = document.querySelector("#txtnumeroempre").value;  
-                let livro = document.querySelector("#txtlivro").value;  
+                let numeroEmpre = document.querySelector("#txtnumeroempre").value;
+                let livro = document.querySelector("#txtlivro").value;
 
                 postForm(`${BASEURL}/emprestimo/addEmprestimoLivro`, {
                     txtnumeroempre: numeroEmpre,

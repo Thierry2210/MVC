@@ -24,20 +24,14 @@
                                     <div class="modal-content rounded-4 shadow">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="modalLivrosLabel">Livros Emprestados</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="text-muted">Selecione os livros que deseja devolver:</p>
-                                            <div class="table-responsive">
-                                                <table class="table table-striped table-hover align-middle">
-                                                    <thead class="table-light">
-                                                        <tr>
-                                                            <th>Selecionar</th>
-                                                            <th>Livro</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="lslivrosemprestados" class="mt-4"></tbody>
-                                                </table>
+                                            <p class="text-muted">Selecione o livro que deseja devolver:</p>
+                                            <div class="mb-3">
+                                                <label for="livroSelecionado" class="form-label">Livro</label>
+                                                <select name="livro" id="livroSelecionado" class="form-select">
+                                                    <option value="">Selecione um livro</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -49,7 +43,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </form>

@@ -9,6 +9,7 @@
                     <table class="table table-hover align-middle" id="tabres">
                         <thead class="table-light">
                             <tr>
+                                <th>RA</th>
                                 <th>Livro</th>
                                 <th>Data de Retirada</th>
                                 <th>Data Prevista de Devolução</th>
