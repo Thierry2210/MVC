@@ -9,7 +9,7 @@
                             <div class="mb-4 col-md-3">
                                 <label for="txtra" class="form-label">RA Aluno</label>
                                 <div class="d-flex gap-2">
-                                    <input type="text" name="txtra" id="txtra" class="form-control">
+                                    <input type="text" name="ra" id="txtra" class="form-control">
                                 </div>
                                 <div class="text-center mt-3">
                                     <button type="button" class="btn btn-secondary" id="btnBusc"
@@ -28,9 +28,9 @@
                                         <div class="modal-body">
                                             <p class="text-muted">Selecione o livro que deseja devolver:</p>
                                             <div class="mb-3">
-                                                <label for="livroSelecionado" class="form-label">Livro</label>
+                                                <label form="livroSelecionado" class="form-label">Livro</label>
                                                 <select name="livro" id="livroSelecionado" class="form-select">
-                                                    <option value="">Selecione um livro</option>
+                                                    <option value=""></option>
                                                 </select>
                                             </div>
                                         </div>

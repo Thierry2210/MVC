@@ -52,7 +52,7 @@ class Devolucao_model extends Model
 
         $multa = 0;
         if ($dias > 30) {
-            $multa = ($dias - 30) * 1.15;
+            $multa = ($dias - 30) * 1.5;
         }
 
         $result = $this->insert("biblioteca.devolucao", array("emprestimo" => $emprestimo["numero"], "livro" => $livro, "datadevolucao" => date("Y-m-d"), "multa" => $multa));
@@ -61,13 +61,15 @@ class Devolucao_model extends Model
         } else {
             $msg = array("codigo" => 0, "texto" => "Erro ao inserir devolução");
         }
-        echo (json_encode($msg));
+        echo json_encode($msg);
     }
 
     public function selectLivro()
     {
-        $ra = $_POST["ra"] ?? null;
-        $sql = "SELECT 
+        $data = json_decode(file_get_contents('php://input'), true);
+        $ra = $data["ra"] ?? null;
+        $sql = "SELECT
+            l.codigo,
             l.titulo
         FROM 
             biblioteca.emprestimo e,
@@ -84,6 +86,23 @@ class Devolucao_model extends Model
         $stmt->bindParam(':ra', $ra, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo (json_encode(["data", $result]));
+        echo json_encode(["data" => $result]);
     }
+
+    // public function selectLivro()
+    // {
+    //     $result = $this->select("SELECT 
+    //         l.titulo
+    //     FROM 
+    //         biblioteca.emprestimo e,
+    //         biblioteca.emprestimolivro el,
+    //         biblioteca.aluno a,
+    //         biblioteca.livro l  
+    //     WHERE
+    //         e.ra = a.ra
+    //         and e.numero = el.emprestimo
+    //         and el.livro = l.codigo");
+    //     $result = json_encode($result);
+    //     echo ($result);
+    // }
 }

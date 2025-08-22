@@ -3,47 +3,50 @@ function reset() {
     document.querySelector('#livroSelecionado').innerHTML = "";
 }
 
-function selectLivro() {
-    postForm(`${BASEURL}/devolucao/selectLivro`)
-        .then(res => {
-            const select = document.querySelector('#livroSelecionado');
-            select.innerHTML = '<option value="">Selecione um livro</option>'; // reset
 
-            if (Array.isArray(res.data)) {
-                res.data.forEach(res => {
-                    const option = document.createElement('option');
-                    option.value = res.livro_codigo;
-                    option.textContent = res.livro;
-                    select.appendChild(option);
-                });
+function selectLivro() {
+    const ra = document.querySelector("#txtra").value;
+    fetch(`${BASEURL}/devolucao/selectLivro`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',  // Especifica que estamos enviando JSON
+        },
+        body: JSON.stringify({ ra: ra }),  // Envia o RA como JSON
+    })
+        .then(response => response.json())  // Converte a resposta em JSON
+        .then(res => {
+            var txt = "<option selected>Selecione um livro</option>";
+            for (var i = 0; i < res.data.length; i++) {
+                var reg = res.data[i];
+                txt += `<option value="${reg.codigo}">${reg.titulo}</option>`;
             }
+            document.querySelector('#livroSelecionado').innerHTML = txt;
         });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     reset();
+
     document.querySelector("#btnBusc").addEventListener("click", () => {
         selectLivro();
     });
 
     document.querySelector("#btnInc").addEventListener("click", () => {
-        const livroSelecionado = document.querySelector("#livroSelecionado").value;
-        const ra = document.querySelector("#txtra").value;
+        const form = document.querySelector("#frmDevolucao");
+        const formData = new FormData(form);
 
-        const formData = new FormData();
-        formData.append("ra", ra);
-        console.log(ra);
-        formData.append("livro", livroSelecionado);
+        formData.set("livro", document.querySelector("#livroSelecionado").value);
 
-        reset();
         fetch(`${BASEURL}/devolucao/addDevolucao`, {
             method: "POST",
             body: formData
-        }).then(res => {
-            if (res.codigo == "1") {
-                alert(res.data.texto);
-                reset();
-            }
-        });
-    })
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res);
+                if (res.codigo == 1) {
+                    alert(res.texto);
+                }
+            });
+    });
 })

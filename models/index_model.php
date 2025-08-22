@@ -12,9 +12,9 @@ class Index_model extends Model
         $sql = "select
                     e.ra,
                     l.titulo,
-                    e.data,
-                    el.dataprevistadev,
-                    d.datadevolucao,
+                    DATE_FORMAT(e.data, '%d/%m/%Y') as datapegada,
+                    DATE_FORMAT(el.dataprevistadev, '%d/%m/%Y') as dataprevista,
+                    DATE_FORMAT(d.datadevolucao, '%d/%m/%Y') datadevolvida,
 	                d.multa
                 from
                     biblioteca.livro l,
